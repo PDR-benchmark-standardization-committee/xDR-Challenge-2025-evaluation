@@ -1,12 +1,16 @@
-# xDR_Challenge_2025_internal
-xDR_Challenge_2025 internal test
+# xDR-Challenge-2025-evaluation
+[evaluation-tools document](https://pdr-benchmark-standardization-committee.github.io/evaluation-tools_docs/)
+
+# Evaluation Metrics
+
+
 
 # Data
 ```
-evaluation-tools      : evaluation script (subtree)
-launch_evaluation.sh  : exe file
+evaluation-tools      : evaluation script (submodule)
+launch_evaluation.sh  : exe file for Linux
+launch_evaluation.bat : exe file for Windows
 create_combination_table.py : gen combination_table.csv (It runs inside the launch_evaluation.sh)
-combination_table.csv : eval-combination list (est1 - gt1 - est2 - gt2)
 data -
       |
       - map - map_comp2025.bmp        : bitmap (use Obstacle-Error evaluation or Viewer)
@@ -66,14 +70,4 @@ python evaluation-tools/evaltools/show_result.py -m %RESULT_DIR%evaluation_resul
 python evaluation-tools/evaltools/plot_ecdf_from_csv.py -m %RESULT_DIR%evaluation_result.csv %RESULT_DIR%evaluation_result_rel.csv -o %RESULT_DIR%
 ```
 OUTPUT : evaluation_result.csv evaluation_result_rel.csv result/eCDF_***_.png result/eval_summary.json
-
-# subtree(evaluation-tools) update
-```
-> git subtree pull --prefix evaluation-tools git@github.com:aist-harc-swioh/evaluation-tools.git xDR_Challenge_2025 --squash
-```
-
-```
-> https://silver-adventure-z2l91pg.pages.github.io/
-```
-
 
