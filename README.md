@@ -13,6 +13,8 @@ pip install -e .
 
 
 ### Data placement
+For competition participants, the data including `gt` and `destination` will be provided by box link.
+
 ```
 evaluation-tools      : evaluation script (submodule)
 launch_evaluation.sh  : exe file for Linux
