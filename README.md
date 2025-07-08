@@ -33,6 +33,8 @@ data -
       - est - [put your estimated trajectory datas (with {dataname})] : ex) est_{dataname}.csv
 ```
 
+If you want to compare several trajectories, you can select [which folder you want to evaluate](https://github.com/PDR-benchmark-standardization-committee/xDR-Challenge-2025-evaluation/blob/0a26602375b059969c07afffa8227f74281554cc/launch_evaluation.sh#L2) and [which folder you want to output the results](https://github.com/PDR-benchmark-standardization-committee/xDR-Challenge-2025-evaluation/blob/0a26602375b059969c07afffa8227f74281554cc/launch_evaluation.sh#L4).
+
 
 ## Execute evaluations
 
