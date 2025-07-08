@@ -1,0 +1,3 @@
+[submodule "evaluation-tools"]
+	path = evaluation-tools
+	url = git@github.com:PDR-benchmark-standardization-committee/evaluation-tools.git
