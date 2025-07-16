@@ -3,7 +3,7 @@
 set ESTIMATED_TRAJ_DIR=.\data\est\
 set EVAL_RESULT_OUTPUT_DIR=.\data\result\
 
-REM ディレクトリがなければ作成
+REM Create the directory if it does not exist
 if not exist "%EVAL_RESULT_OUTPUT_DIR%" (
     mkdir "%EVAL_RESULT_OUTPUT_DIR%"
 )

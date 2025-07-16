@@ -11,10 +11,25 @@ import re
 
 def main(est1_folder, gt1_folder, est2_folder, gt2_folder, rel_targets, output_dir='./'):
     """
-    フォルダー内のファイル名を取得してcombination_tableを作成する
-    xDR_Challenge_2025用
+    For xDR_Challenge_2025
+    Retrieve file names from the folder and create a combination_table
 
-    table columns : [est1, gt1, tag1, est2, gt2, tag2]
+    Table columns: [est1, gt1, tag1, est2, gt2, tag2]
+
+    Parameters
+    ----------
+    est1_folder : String
+        Estimated trajectory dirname1
+    gt1_folder : String
+        Ground-truth trajectory dirname1
+    est2_folder : String
+        Estimated trajectory dirname2
+    gt2_folder : String
+        Ground-truth trajectory dirname2
+    rel_targets : String
+        Destination type (exhibit, robot)
+    output_dir : String
+        Output directory name
     """
     est1_files = os.listdir(est1_folder)
     gt1_files = os.listdir(gt1_folder)
@@ -68,15 +83,21 @@ def main_cl(args):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Generate est-gt combination table mainly for do_eval_rel.py")
 
-    parser.add_argument('-est1_folder', '-e1_f')
-    parser.add_argument('-gt1_folder', '-g1_f')
-    parser.add_argument('-est2_folder', '-e2_f')
-    parser.add_argument('-gt2_folder', '-g2_f')
+    parser.add_argument('-est1_folder', '-e1_f',
+                        help="Estimated trajectory dirname1")
+    parser.add_argument('-gt1_folder', '-g1_f',
+                        help="Ground-Truth trajectory dirname1")
+    parser.add_argument('-est2_folder', '-e2_f',
+                        help="Estimated trajectory dirname2")
+    parser.add_argument('-gt2_folder', '-g2_f',
+                        help="Ground-Truth trajectory dirname2")
 
-    parser.add_argument('-rel_target', '-rel_target', nargs="+")
-    parser.add_argument('-output_dir', '-o')
+    parser.add_argument('-rel_target', '-rel_target', nargs="+",
+                        help="Destination type (exhibit, robot)")
+    parser.add_argument('-output_dir', '-o', help="Output directory name")
 
     args = parser.parse_args()
     main_cl(args)

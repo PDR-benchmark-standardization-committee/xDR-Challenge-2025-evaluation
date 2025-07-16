@@ -5,14 +5,14 @@ EVAL_RESULT_OUTPUT_DIR=./data/result/
 
 mkdir -p $EVAL_RESULT_OUTPUT_DIR
 
-# python3 コマンドが使えればそれを使い、
-# 使えなければ python コマンドを使う関数定義 (windows git bash想定)
+# Define a function that uses python3 if available,
+# otherwise falls back to python (for Windows Git Bash)
 
 if grep -q Microsoft /proc/version 2>/dev/null; then
-  # WSL環境（Linux互換）なら python3 を使う
+  # Use python3 if running in a WSL (Linux-like) environment
   PYTHON=python3
 elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
-  # Git BashなどWindows環境なら python を使う
+  # Otherwise, use python (e.g., for Windows Git Bash)
   PYTHON=python
 else
   PYTHON=python3
