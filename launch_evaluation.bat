@@ -24,3 +24,6 @@ python evaluation-tools/evaltools/show_result.py -m %EVAL_RESULT_OUTPUT_DIR%eval
 
 python evaluation-tools/evaltools/plot_ecdf_from_csv.py -m %EVAL_RESULT_OUTPUT_DIR%evaluation_result.csv %EVAL_RESULT_OUTPUT_DIR%evaluation_result_rel.csv ^
         -o %EVAL_RESULT_OUTPUT_DIR%
+
+python evaluation-tools/evaltools/plot_traj.py -ed %ESTIMATED_TRAJ_DIR% -gd data/gt/ ^
+        -t combination_table.csv -o %EVAL_RESULT_OUTPUT_DIR%
