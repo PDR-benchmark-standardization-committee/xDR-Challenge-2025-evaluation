@@ -1,7 +1,91 @@
 # xDR-Challenge-2025-evaluation
 
+## Evaluation criteria
 
-## Setup
+The evaluation criteria of the xDR Challenge is as follows. Score 100 is the maximum points which completely matches to the ground truth.
+The competitors are asked to maximize the score (minimize error).
+
+### 1) Pick one summary value per criterion
+
+From each time series / sample set, extract a single number called **`eval_value`** according to **stat**:
+
+* `stat = median` → use the median
+* `stat = percentile` → use the *q*-th percentile (e.g., 95 → 95th percentile)
+
+*Example:* For `ce`, use the **95th percentile** of the position error as `eval_value`.
+
+The table for actual values are as follows.
+
+| criteria     | stat       |  percentile | best(100)-score value | zero-score value | weight | note | 
+| ------------- | ---------- | -: | --: | ---: | -----: | -- |
+| `ce`          | percentile | 95 |   0 |   10 m (approximately half width of the field) |    1/7 | Only evaluate time window with VISO |
+| `he`          | median | – |   0 |  π/2 rad (leads to wrong turn-by-turn navigation)|    1/7 | |
+| `eag`         | median | – |   0 |    0.25 m/s (cannot even reach to first location) |    1/7 | Only evaluate timw window without VISO|
+| `rda_robot`   | median | - |   0 |    1 m (not able to reach by hand) |    1/7 | Only evaluate when approaching to the robot |
+| `rpa_robot`   | median | - |   0 |  π rad (not able to reach by hand) |    1/7 | Only evaluate when approaching to the robot |
+| `rda_exhibit` | median | - |   0 |    1 m (not able to reach by hand)|    1/7 | Only evaluate when approacing/experiencing exhibit |
+| `rpa_exhibit` | median | - |   0 |  π rad (not able to reach by hand) |    1/7 | Only evaluate when approacing/experiencing exhibit |
+
+---
+
+### 2) Convert that value to a 0–100 score (lower-is-better)
+
+Let **best(100)-score value** be `best` and **zero-score value** be `zero`.
+Compute:
+
+```
+score = 100 × (zero − eval_value) / (zero − best)
+```
+
+* If `eval_value = best`, the score is **100**; if `eval_value = zero`, the score is **0**.
+* Values outside the range are **not clipped** (they can go below 0 or above 100).
+* This assumes “smaller is better” (`best < zero`).
+  If a metric were “larger is better,” flip the formula:
+
+  ```
+  score = 100 × (eval_value − zero) / (best − zero)
+  ```
+
+---
+
+### 3) Overall (Competition) score
+
+Sum the weighted per-criterion scores:
+
+```
+Total = Σ_i ( weight_i × score_i )
+```
+
+In your table all `weight = 1/7`, so the **overall score equals the average** of the seven criterion scores.
+
+---
+
+### 4) Numerical examples
+
+* **`ce`**: 95th-percentile error `eval_value = 4.0 m`
+
+  `best = 0`, `zero = 10` →
+
+  `score = 100 × (10 − 4) / (10 − 0) = 60`
+
+* **`he`**: median heading error `eval_value = 0.40 rad`
+
+  `best = 0`, `zero = π/2 ≈ 1.571` →
+
+  `score ≈ 100 × (1.571 − 0.40) / 1.571 ≈ 74.5`
+
+* **Overall contribution** (each weight = 1/7):
+
+  `ce`: `60 × 1/7 ≈ 8.57`
+
+  `he`: `74.5 × 1/7 ≈ 10.64`
+
+  Add the other five criteria similarly to get **Total**.
+
+You will find the score in the result/eval_summary.json and result/Score_graph.png.
+
+
+## Evaluation tool setup
 
 ### Install
 ```
