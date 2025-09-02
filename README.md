@@ -82,7 +82,9 @@ In your table all `weight = 1/7`, so the **overall score equals the average** of
 
   Add the other five criteria similarly to get **Total**.
 
-You will find the score in the result/eval_summary.json and result/Score_graph.png.
+
+With this evaluation tool, you can see the score on the command line.
+Also, you will find the score in the result/eval_summary.json and result/Score_graph.png.
 
 
 ## Evaluation tool setup
